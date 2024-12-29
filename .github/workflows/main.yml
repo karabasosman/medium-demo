@@ -38,3 +38,9 @@ jobs:
       run: docker tag my-image oskaksdemo.azurecr.io/my-image:latest
     - name: Docker push
       run: docker push oskaksdemo.azurecr.io/my-image:latest
+    - name: Configure kubectl
+      run: az aks get-credentials --resource-group rg-sonarqube-demo --name osk-aks-demo
+    - name: Deploy to AKS
+      run: |
+        kubectl apply -f k8s/deployment.yaml
+        kubectl apply -f k8s/service.yaml

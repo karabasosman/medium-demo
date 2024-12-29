@@ -1,0 +1,12 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-image-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: my-image
+  ports:
+    - port: 80
+      targetPort: 80
