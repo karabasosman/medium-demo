@@ -38,6 +38,13 @@ jobs:
       run: docker tag my-image oskaksdemo.azurecr.io/my-image:latest
     - name: Docker push
       run: docker push oskaksdemo.azurecr.io/my-image:latest
+  deploy:
+    runs-on:arc-runner-set
+    steps:
+    - name: Login to Azure
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Configure kubectl
       run: az aks get-credentials --resource-group rg-sonarqube-demo --name osk-aks-demo
     - name: Deploy to AKS
