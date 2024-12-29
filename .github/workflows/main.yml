@@ -39,8 +39,8 @@ jobs:
     - name: Docker push
       run: docker push oskaksdemo.azurecr.io/my-image:latest
   deploy:
+    needs: build
     runs-on: arc-runner-set
-    depends-on: build
     steps:
     - name: Login to Azure
       uses: azure/login@v2
