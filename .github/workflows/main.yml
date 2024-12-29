@@ -26,3 +26,5 @@ jobs:
       run: ./mvnw clean -U install -X -s .github/settings.xml
       env:
         GITHUB_TOKEN: ${{ secrets.github.token }}
+    - name: Docker build
+      run: docker build -t my-image .
