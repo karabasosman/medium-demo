@@ -49,6 +49,7 @@ jobs:
       uses: azure/login@v1.6.1
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: Azure/setup-kubectl@v4.0.0
     - name: Configure kubectl
       run: az aks get-credentials --resource-group rg-sonarqube-demo --name osk-aks-demo
     - name: Deploy to AKS
