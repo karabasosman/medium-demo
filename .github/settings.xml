@@ -14,7 +14,7 @@
                 </repository>
                 <repository>
                     <id>github</id>
-                    <url>https://maven.pkg.github.com/cal0610/*</url>
+                    <url>https://maven.pkg.github.com/mstr-event-demo-org/medium-auth-commons</url>
                     <snapshots>
                         <enabled>true</enabled>
                     </snapshots>
