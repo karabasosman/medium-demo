@@ -9,10 +9,11 @@ RUN mvn package -DskipTests
 
 # Stage 2: Run
 FROM openjdk:17-slim
+ARG JAR_FILE_VERSION=0.0.1-SNAPSHOT
 RUN groupadd --gid 1001 appuser && \
     useradd --uid 1001 --gid appuser --shell /bin/bash --create-home appuser
 WORKDIR /home/appuser
-COPY --from=builder /app/target/medium-demo-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=builder /app/target/medium-demo-${JAR_FILE_VERSION}.jar app.jar
 RUN chown -R appuser:appuser /home/appuser
 USER appuser
 EXPOSE 8080

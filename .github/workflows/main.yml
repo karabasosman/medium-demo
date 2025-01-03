@@ -26,8 +26,13 @@ jobs:
       run: ./mvnw clean -U install -X -s .github/settings.xml
       env:
         GITHUB_TOKEN: ${{ secrets.github.token }}
+    
+    - name: Extract JAR file version
+      id: extract_version
+      run: echo "JAR_FILE_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+
     - name: Docker build
-      run: docker build -t my-image .
+      run: docker build --build-arg JAR_FILE_VERSION=${{ env.JAR_FILE_VERSION }} -t my-image .
     - name: Login to Azure
       uses: azure/login@v2
       with:
