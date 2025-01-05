@@ -1,9 +1,10 @@
 name: Discover Environments
 on:
   workflow_dispatch:
-env: Prod
+
 jobs:
   test:
+    env: Prod
     runs-on: ubuntu-latest
     steps:
       - name: Hello
