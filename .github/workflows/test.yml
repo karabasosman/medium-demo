@@ -3,10 +3,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  test:
+  dev:
     environment: Dev
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        run: echo ${{secrets.ENV_NAME}}
-  
+        run: echo ${{env.NAME}}
+  prod:
+    environment: Prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo ${{env.NAME}}
