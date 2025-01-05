@@ -8,5 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        run: echo {{env.ENV_NAME}}
+        run: echo {{secrets.ENV_NAME}}
   
