@@ -1,0 +1,11 @@
+name: Discover Environments
+on:
+  workflow_dispatch:
+env: Prod
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo {{env.ENV_NAME}}
+  
