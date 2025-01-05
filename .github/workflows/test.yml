@@ -4,7 +4,7 @@ on:
 
 jobs:
   test:
-    env: Prod
+    environment: Dev
     runs-on: ubuntu-latest
     steps:
       - name: Hello
