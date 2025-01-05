@@ -8,10 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        run: echo ${{env.NAME}}
+        run: echo ${{vars.NAME}}
   prod:
     environment: Prod
     runs-on: ubuntu-latest
     steps:
       - name: Hello
-        run: echo ${{env.NAME}}
+        run: echo ${{vars.NAME}}
