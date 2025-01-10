@@ -1,0 +1,17 @@
+name: Discover Environments
+on:
+  workflow_dispatch:
+
+jobs:
+  dev:
+    environment: Dev
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo ${{vars.NAME}}
+  prod:
+    environment: Prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hello
+        run: echo ${{vars.NAME}}
