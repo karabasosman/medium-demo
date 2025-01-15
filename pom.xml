@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.medium</groupId>
 	<artifactId>medium-demo</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>medium-demo</name>
 	<description>demo project consuming auth commons test</description>
 	<properties>
