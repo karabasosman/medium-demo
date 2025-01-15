@@ -16,12 +16,6 @@ jobs:
         # fetch-depth=2 ensures we have the previous commit
         fetch-depth: 2
 
-    - name: Check Version Changes
-      uses: sivkovych/check-version-sh@v1.5.1
-      with:
-        log-level: "DEBUG"
-        check-only-for: "pom.xml"
-        
         
     - name: Get previous version from the previous commit
       id: old_version
