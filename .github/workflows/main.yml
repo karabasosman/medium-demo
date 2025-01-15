@@ -19,7 +19,7 @@ jobs:
     - name: Check Version Changes
       uses: sivkovych/check-version-sh@v1.5.1
       with:
-        log-level: "INFO"
+        log-level: "DEBUG"
         check-only-for: "pom.xml"
         
         
