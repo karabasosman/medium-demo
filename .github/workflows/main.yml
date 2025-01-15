@@ -13,8 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: avides/actions-project-version-check@v1.4.0
-      id: actions_project_version_check
+    - uses: jessehouwing/actions-semver-checker@v1
       with:
-        token: ${{ secrets.TEST_TOKEN }}
-        file-to-check: "pom.xml"
+        check-minor-version: true
