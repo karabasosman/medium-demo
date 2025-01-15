@@ -13,6 +13,53 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - uses: jessehouwing/actions-semver-checker@v1
-      with:
-        check-minor-version: true
+    - name: Get previous version from the previous commit
+      id: old_version
+      run: |
+          # Switch to the previous commit
+          git checkout HEAD~1
+
+          # Extract version from pom.xml at this previous commit
+          PREVIOUS_VERSION=$(mvn help:evaluate \
+            -Dexpression=project.version \
+            -q \
+            -DforceStdout)
+
+          echo "previous_version=$PREVIOUS_VERSION" >> "$GITHUB_OUTPUT"
+
+    - name: Switch back to latest commit
+      run: git checkout -
+
+    - name: Get new version from current commit
+      id: new_version
+      run: |
+          NEW_VERSION=$(mvn help:evaluate \
+            -Dexpression=project.version \
+            -q \
+            -DforceStdout)
+
+          echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+
+    - name: Compare versions and fail if not incremented
+      run: |
+          OLD_VERSION="${{ steps.old_version.outputs.previous_version }}"
+          NEW_VERSION="${{ steps.new_version.outputs.new_version }}"
+
+          echo "Previous commit version: $OLD_VERSION"
+          echo "Current commit version : $NEW_VERSION"
+
+          # Simple numeric/lexical approach via sort -V
+          # If NEW_VERSION is not greater, fail the workflow.
+          compare_result=$(printf '%s\n%s\n' "$OLD_VERSION" "$NEW_VERSION" | sort -V | head -n 1)
+
+          if [ "$compare_result" = "$NEW_VERSION" ] && [ "$NEW_VERSION" != "$OLD_VERSION" ]; then
+            # That means NEW_VERSION <= OLD_VERSION
+            echo "ERROR: New version ($NEW_VERSION) is not strictly greater than old version ($OLD_VERSION)."
+            exit 1
+          elif [ "$NEW_VERSION" = "$OLD_VERSION" ]; then
+            # If you also want to fail on an equal version (strictly greater required)
+            echo "ERROR: New version ($NEW_VERSION) is the same as old version ($OLD_VERSION)."
+            exit 1
+          else
+            echo "SUCCESS: New version ($NEW_VERSION) is greater than old version ($OLD_VERSION). Proceeding..."
+          fi
