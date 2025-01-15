@@ -12,6 +12,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        # fetch-depth=2 ensures we have the previous commit
+        fetch-depth: 2
 
     - name: Get previous version from the previous commit
       id: old_version
