@@ -17,7 +17,7 @@ jobs:
       id: old_version
       run: |
           # Switch to the previous commit
-          git checkout HEAD~1
+          git checkout HEAD-1
 
           # Extract version from pom.xml at this previous commit
           PREVIOUS_VERSION=$(mvn help:evaluate \
